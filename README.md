@@ -75,6 +75,7 @@ blocked_ips.txt
 Each entry contains the IP address and the timestamp when it was blocked.
 
 Python client major version == Elasticsearch major version
+
 Elasticsearch	Python client
 7.x = elasticsearch<8
 8.x	= elasticsearch<9
