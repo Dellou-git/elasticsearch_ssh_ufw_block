@@ -34,7 +34,7 @@ Setup
 
 Clone the repository and install the dependencies:
 
-git clone https://github.com/Dellou-git/elastic-ssh-multiple-logon-failures-rule---block-ip-via-ufw/edit/main/README.md
+git clone https://github.com/Dellou-git/elasticsearch_ssh_ufw_block
 cd elastic-ssh-ip-blocker
 
 python3 -m venv venv
