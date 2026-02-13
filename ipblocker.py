@@ -3,37 +3,44 @@ from datetime import datetime
 import subprocess
 import os
 
-ELASTIC_URL = "https//:#localhost:9200" #If your elasticsearch doesnt use TLS/SSL, use http instead
-USERNAME = "<Username>" #Insert your elasticsearch username
-PASSWORD = "<Password>" #Insert your elasticsearch password
+ELASTIC_URL = "https://localhost:9200"
+USERNAME = "elastic"
+PASSWORD = "kP_bzOjkdqV-*l1wn+5W"
 
-INDEX = ".internal.alerts-security.alerts-default-*"  #This is the default index for alerts, make sure its the right one on your elasticsearch tho
-RULE_NAME = ">3 Failed SSH logon attempts in 5 minutes" #This wont work for you -> Its a custom rule so make sure you either create a rule with the same name or use a different Rule
+INDEX = ".internal.alerts-security.alerts-default-*"
+RULE_NAME = ">3 Failed SSH logon attempts in 5 minutes"
 
 BLOCKLIST_FILE = "blocked_ips.txt"
 
 es = Elasticsearch(
     ELASTIC_URL,
     basic_auth=(USERNAME, PASSWORD),
-    verify_certs=False #This is to not verify SSL/TLS Certificates, which is insecure but okay for a homelab. Please remove this line in a production environment.
+    verify_certs=False
 )
 
 blocked_ips = set()
 
-# ---------- LOAD BLOCKLIST ----------
+# ---------- BLOCKLIST LADEN ----------
 if os.path.exists(BLOCKLIST_FILE):
     with open(BLOCKLIST_FILE) as f:
         for line in f:
             line = line.strip()
             if not line:
                 continue
-            ip = line.split(",")[0].split()[0]
-            blocked_ips.add(ip)
 
-# ---------- SAVE IP ----------
+            line = line.replace(",", " ")
+            parts = line.split()
+
+            if parts:
+                blocked_ips.add(parts[0])
+
+print(f"Loaded {len(blocked_ips)} blocked IPs")
+
+# ---------- IP SPEICHERN ----------
 def save_ip(ip):
+    ts = datetime.now().astimezone().isoformat()
     with open(BLOCKLIST_FILE, "a") as f:
-        f.write(f"{ip} {datetime.now().astimezone().isoformat()}\n")
+        f.write(f"{ip},{ts}\n")
 
 # ---------- UFW CHECK ----------
 def ip_already_blocked(ip):
@@ -97,3 +104,7 @@ for hit in resp["hits"]["hits"]:
     block_ip(ip)
     blocked_ips.add(ip)
     save_ip(ip)
+
+# ---------- LAST RUN SPEICHERN ----------
+with open("last_run.txt", "w") as f:
+    f.write(datetime.now().astimezone().isoformat())
