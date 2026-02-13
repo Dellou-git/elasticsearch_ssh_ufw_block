@@ -2,8 +2,8 @@ from elasticsearch import Elasticsearch
 from datetime import datetime
 import subprocess
 import os
-
-ELASTIC_URL = "https://localhost:9200"
+# My URL and credentials are just placeholders, use yours instead!
+ELASTIC_URL = "https://localhost:9200" 
 USERNAME = "elastic"
 PASSWORD = "kP_bzOjkdqV-*l1wn+5W"
 
