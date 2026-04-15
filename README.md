@@ -38,34 +38,41 @@ At the end of execution, the script writes the current timestamp to last_run.txt
 
 # Setup
 
-Clone the repository and install the dependencies:
+### Clone the repository and install the dependencies:
 
 git clone https://github.com/Dellou-git/elasticsearch_ssh_ufw_block
+
 cd elastic-ssh-ip-blocker
 
 python3 -m venv venv
+
 source venv/bin/activate
+
 pip install -r requirements.txt
 
-Configure credentials
+### Configure credentials
 
 Open ipblocker.py and set your Elasticsearch credentials:
 
 USERNAME = "<Username>"
+
 PASSWORD = "<Password>"
 
 Make sure the following values match your environment:
 
 Elasticsearch URL
+
 Alerts index
+
 Detection rule name
 
-Run manually
+### Run manually
 sudo venv/bin/python ipblocker.py
 
 Root privileges are required because the script modifies UFW firewall rules.
 
-Verify blocking
+### Verify blocking
+
 sudo ufw status
 
 Blocked IPs are stored in:
@@ -74,7 +81,7 @@ blocked_ips.txt
 
 Each entry contains the IP address and the timestamp when it was blocked.
 
-Python client major version == Elasticsearch major version
+### Python client major version == Elasticsearch major version
 
 ## 🧠 Elasticsearch Python Client Compatibility
 
