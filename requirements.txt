@@ -1,1 +1,1 @@
-elasticsearch<9
+elasticsearch>=9,<10
