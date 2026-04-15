@@ -38,10 +38,6 @@ At the end of execution, the script writes the current timestamp to last_run.txt
 
 # Setup
 
-Run the script
-
-Setup
-
 Clone the repository and install the dependencies:
 
 git clone https://github.com/Dellou-git/elasticsearch_ssh_ufw_block
