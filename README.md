@@ -81,6 +81,8 @@ blocked_ips.txt
 
 Each entry contains the IP address and the timestamp when it was blocked.
 
+### Set timer / cronjob (optional)
+
 ### Python client major version == Elasticsearch major version
 
 ## 🧠 Elasticsearch Python Client Compatibility
