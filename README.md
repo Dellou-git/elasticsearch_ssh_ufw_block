@@ -83,10 +83,15 @@ Each entry contains the IP address and the timestamp when it was blocked.
 
 Python client major version == Elasticsearch major version
 
-Elasticsearch	Python client
-7.x = elasticsearch<8
-8.x	= elasticsearch<9
-9.x = elasticsearch>=9
+## 🧠 Elasticsearch Python Client Compatibility
+
+| Elasticsearch Version | Python Client Version        |
+|----------------------|-----------------------------|
+| 7.x                  | `elasticsearch>=7,<8`       |
+| 8.x                  | `elasticsearch>=8,<9`       |
+| 9.x                  | `elasticsearch>=9,<10`      |
+
+> ⚠️ The Python client **major version must match** your Elasticsearch major version.
 
 And so on
 
