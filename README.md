@@ -27,14 +27,14 @@ If the IP is new, the script inserts a UFW rule to deny incoming SSH connections
 After successfully blocking the IP, the script:
 
 Adds the IP to the in-memory blocklist
-Saves it to blocked_ips.txt יחד with a timestamp
+Saves it to blocked_ips.txt with a timestamp
 Closes the corresponding alert in Elasticsearch
 
 Closing the alert is done by updating the document using its exact index name (no wildcard), which avoids Elasticsearch update errors.
 
 If blocking fails, the alert remains open so it can be retried later.
 
-At the end of execution, the script writes the current timestamp to last_run.txt (for potential future use) and logs a summary of how many IPs were newly blocked and how many alerts were skipped.
+At the end of execution, the script writes the current timestamp to last_run.txt (for potential future use, like using it instead of gte) and logs a summary of how many IPs were newly blocked and how many alerts were skipped.
 
 # Setup
 
